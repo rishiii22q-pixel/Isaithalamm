@@ -25,8 +25,9 @@ const Login = () => {
             await googleLogin(credentialResponse.credential);
             navigate('/');
         } catch (error) {
-            console.error(error);
-            alert('Google Login Failed');
+            console.error('Full login error:', error);
+            const message = error.response?.data?.message || 'Google Login Failed. Please try again.';
+            alert(message);
         }
     };
 
