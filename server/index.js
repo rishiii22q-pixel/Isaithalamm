@@ -39,8 +39,16 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Database Connection
-connectDB();
+// Database Connection Middleware
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (error) {
+        console.error('Database connection error in middleware:', error);
+        res.status(500).json({ message: 'Database connection error. Please try again later.' });
+    }
+});
 
 // Routes
 app.use('/api/auth', authRoutes);

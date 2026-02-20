@@ -24,7 +24,9 @@ const Signup = () => {
             await register(formData);
             navigate('/');
         } catch (error) {
-            alert('Registration failed');
+            console.error('Registration error:', error);
+            const message = error.response?.data?.message || 'Registration failed. Please try again.';
+            alert(message);
         }
     };
 
@@ -33,7 +35,9 @@ const Signup = () => {
             await googleLogin(credentialResponse.credential);
             navigate('/');
         } catch (error) {
-            alert('Google Signup Failed');
+            console.error('Google signup error:', error);
+            const message = error.response?.data?.message || 'Google Signup Failed. Please try again.';
+            alert(message);
         }
     };
 
